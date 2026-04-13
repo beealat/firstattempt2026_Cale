@@ -92,8 +92,8 @@ firstattempt2026_Cale/
 ├── styles/
 │   └── main.css            ← All CSS styles
 ├── js/
-│   └── app.js              ← AngularJS module, controller, and all app data
-└── screenshots/            ← All application screenshots
+    └── app.js              ← AngularJS module, controller, and all app data
+
 ```
 
 ### How the Structure Works
