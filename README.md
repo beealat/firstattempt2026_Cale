@@ -236,63 +236,63 @@ These are the errors and issues discovered during the PWA conversion that requir
 **1. Login Page — Alumni**
 The login screen with the ADDU crest, biometric login option, and Alumni / User role selected.
 
-<img width="1916" height="1020" alt="Screenshot 2026-04-13 151730" src="https://github.com/user-attachments/assets/126211e5-0e98-405c-8353-ec3ca77ac207" />
+<img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/ebf80cd9-4d44-40dc-aafa-a0008a2943a1" />
 
 ---
 
 **2. Home Dashboard**
 The alumni home screen showing the welcome hero banner, quick action shortcuts, daily snapshot cards, and recent activity feed.
 
-<img width="1918" height="1016" alt="Screenshot 2026-04-13 151808" src="https://github.com/user-attachments/assets/68de9035-d140-462b-bb4f-601a3d4c8b0b" />
+<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/fc98203e-8f4f-4635-a000-11825290f87e" />
 
 ---
 
 **3. Alumni Network**
 The network page showing verified alumni cards with Connect and Message buttons, filterable by Near Me, Industry Experts, and Same Batch.
 
-<img width="1917" height="1019" alt="Screenshot 2026-04-13 151816" src="https://github.com/user-attachments/assets/90a16122-3ada-4631-8ed0-fb4f23414b56" />
+<img width="1919" height="1019" alt="image" src="https://github.com/user-attachments/assets/b44b234f-3e00-4be1-aac5-5ccd8e24b03f" />
 
 ---
 
 **4. Donation Hub**
 The donation page showing total impact, donation categories, verified urgent appeals with progress bars, and a Start a Campaign button.
 
-<img width="1918" height="1017" alt="Screenshot 2026-04-13 151825" src="https://github.com/user-attachments/assets/d78e5310-82bd-454d-adab-043e6189497d" />
+<img width="1915" height="1022" alt="image" src="https://github.com/user-attachments/assets/8b0cc31f-02f4-4197-b260-c2e6f4ba0f3e" />
 
 ---
 
 **5. Career Opportunities**
 The career page showing recommended job listings from Google and Spotify, alongside featured alumni mentors available for meetings.
 
-<img width="1919" height="1021" alt="Screenshot 2026-04-13 151833" src="https://github.com/user-attachments/assets/8e62533d-67b3-4f3c-8744-7be70b3801ee" />
+<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/f66c850c-58bd-4314-a472-879f3f6b17e1" />
 
 ---
 
 **6. Academic Records**
 The documents page showing the Digital Academic Passport, document services (transcript, e-diploma, degree verification), and request history.
 
-<img width="1919" height="1016" alt="Screenshot 2026-04-13 151841" src="https://github.com/user-attachments/assets/2d427972-b136-4fb6-b3bf-69d63f9a7e46" />
+<img width="1919" height="1019" alt="image" src="https://github.com/user-attachments/assets/b5d39e54-faf2-43d9-882f-c927b6cf5468" />
 
 ---
 
 **7. My Profile**
 The alumni profile page showing verified user info, academic passport card, additional credentials, and account settings.
 
-<img width="1919" height="1020" alt="Screenshot 2026-04-13 151848" src="https://github.com/user-attachments/assets/f4ac0bed-c8b4-4096-b1dc-3352fbb7e238" />
+<img width="1916" height="1009" alt="image" src="https://github.com/user-attachments/assets/67510aac-1ae0-474a-870c-224fad7471d6" />
 
 ---
 
 **8. Pledge & Automate**
 The pledge page showing a donut chart of contributions across 4 key areas, alongside a recurring donation setup form with payment method selection.
 
-<img width="1919" height="908" alt="Screenshot 2026-04-13 151859" src="https://github.com/user-attachments/assets/5a5aa44f-2896-4efc-98c6-8d92e3bf9885" />
+<img width="1919" height="1017" alt="image" src="https://github.com/user-attachments/assets/c6232abd-68cb-4e45-913b-5b9caf7bb9d1" />
 
 ---
 
 **9. My Impact**
 The impact page showing total projects funded, lives touched, contributed amount, quick action grid, and full transaction history.
 
-<img width="1919" height="1021" alt="Screenshot 2026-04-13 151913" src="https://github.com/user-attachments/assets/18dfd32b-9677-4201-8611-ef70a27f65c3" />
+<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/a90bf367-91d2-4f86-9866-afedeba9b709" />
 
 ---
 
@@ -301,42 +301,42 @@ The impact page showing total projects funded, lives touched, contributed amount
 **10. Login Page — Admin**
 The same login screen with Admin / Staff role selected instead.
 
-<img width="1919" height="1020" alt="Screenshot 2026-04-13 152049" src="https://github.com/user-attachments/assets/26610e12-b358-41d8-9062-d9f50bc6e6ff" />
+<img width="1916" height="1009" alt="image" src="https://github.com/user-attachments/assets/379af8bc-45cc-4337-8140-93790c40bd1a" />
 
 ---
 
 **11. Admin Home Dashboard**
 The admin home screen showing the coordinator welcome banner, daily overview with pending reviews and verifications, and recent platform activity.
 
-<img width="1919" height="1022" alt="Screenshot 2026-04-13 152057" src="https://github.com/user-attachments/assets/395e51c0-940e-4ed2-a132-18d7acfdc4c1" />
+<img width="1919" height="1023" alt="image" src="https://github.com/user-attachments/assets/74776973-221e-433f-ae82-be1d60bf4109" />
 
 ---
 
 **12. Moderation Queue**
 The queue page showing all pending submissions — donations, network requests, job posts, document verifications, and emergency fund requests — each with a Review button.
 
-<img width="1919" height="1018" alt="Screenshot 2026-04-13 152106" src="https://github.com/user-attachments/assets/d7ee03d3-397a-4bdb-89ec-c8d2be78418c" />
+<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/e05626c2-095d-46f2-8c7f-87558e7509cb" />
 
 ---
 
 **13. Donation Insights**
 The insights page showing platform analytics — total funds raised ($124.5k), new donors, active campaigns, verification rate, donation trend line chart, and category breakdown donut chart.
 
-<img width="1919" height="1018" alt="Screenshot 2026-04-13 152115" src="https://github.com/user-attachments/assets/224cb1b1-a4e8-4787-9163-c49c7b1c3332" />
+<img width="1919" height="1016" alt="image" src="https://github.com/user-attachments/assets/4dc96e10-34d8-43eb-8fc1-de27a8130913" />
 
 ---
 
 **14. Messages / Inbox**
 The messages page showing the staff inbox with unread messages from alumni regarding scholarships, document verifications, and emergency fund requests.
 
-<img width="1919" height="1023" alt="Screenshot 2026-04-13 152124" src="https://github.com/user-attachments/assets/dec76eee-ef97-4290-a9a1-b48fc8b1aa4b" />
+<img width="1919" height="1021" alt="image" src="https://github.com/user-attachments/assets/a28e266d-05fb-4dac-af87-bfe8f173a74b" />
 
 ---
 
 **15. Admin Profile**
 The admin coordinator profile showing the gold academic passport card, additional credentials, settings menu, and Log Out button.
 
-<img width="1917" height="1019" alt="Screenshot 2026-04-13 152133" src="https://github.com/user-attachments/assets/66a24d7f-fe36-4d6b-846a-2f90ba4108e2" />
+<img width="1919" height="1025" alt="image" src="https://github.com/user-attachments/assets/0936af14-9285-4b8f-829b-1d7c5d1968d2" />
 
 ---
 
