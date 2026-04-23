@@ -71,6 +71,31 @@ This project was built using **AngularJS 1.x** as a single-page application (SPA
 
 The app is now running! ✅
 
+> ⚠️ **Important for PWA testing:** Always use Live Server — never open `index.html` by double-clicking or using VS Code's Run & Debug. The PWA features (Service Worker and manifest) require an `http://` origin and will not work over `file://`.
+
+---
+
+### Setting Live Server to Open Chrome (Required for PWA Install Demo)
+
+By default, Live Server may open your system's default browser (e.g. Edge). For PWA testing, Chrome is recommended because it shows the install button most reliably.
+
+**Option 1 — Via Settings UI:**
+1. Press `Ctrl + ,` to open VS Code Settings
+2. Search for `Live Server browser`
+3. Find **Live Server > Settings: Custom Browser**
+4. Change the dropdown to **chrome**
+
+**Option 2 — Via settings.json:**
+1. Press `Ctrl + Shift + P`
+2. Type `Open User Settings JSON` and select it
+3. Add this inside the curly braces:
+   ```json
+   "liveServer.settings.CustomBrowser": "chrome"
+   ```
+4. Save with `Ctrl + S`
+
+After this, right-clicking `index.html` → **Open with Live Server** will launch Chrome at `http://127.0.0.1:5500/index.html`.
+
 ---
 
 ### Troubleshooting
@@ -81,6 +106,8 @@ The app is now running! ✅
 | Live Server not in right-click menu | Make sure the extension is installed, then restart VS Code |
 | Styles not loading | Make sure you opened the whole **folder** in VS Code, not just the file |
 | No internet connection | The app requires internet to load AngularJS and Chart.js from CDN |
+| PWA install button not showing | Open via Live Server in Chrome — not Edge, not via Run & Debug |
+| Service Worker registration failed (`null` origin error) | You opened the file directly in the browser — use Live Server instead |
 
 ---
 
@@ -89,11 +116,19 @@ The app is now running! ✅
 ```
 firstattempt2026_Cale/
 ├── index.html              ← Main entry point; contains all page templates as ng-template blocks
-├── styles/
-│   └── main.css            ← All CSS styles
-├── js/
-    └── app.js              ← AngularJS module, controller, and all app data
-
+├── main.css                ← All CSS styles (flat structure, no subfolders)
+├── app.js                  ← AngularJS module, controller, and all app data
+├── sw.js                   ← Service Worker for PWA offline caching
+├── manifest.json           ← PWA manifest with app identity and icons
+└── icons/
+    ├── icon-72x72.png
+    ├── icon-96x96.png
+    ├── icon-128x128.png
+    ├── icon-144x144.png
+    ├── icon-152x152.png
+    ├── icon-192x192.png
+    ├── icon-384x384.png
+    └── icon-512x512.png
 ```
 
 ### How the Structure Works
@@ -102,11 +137,71 @@ Rather than loading separate HTML files (which can cause issues with Live Server
 
 ---
 
+## PWA Conversion (Activity 15)
+
+This branch (`feature/pwa-ready`) adds Progressive Web App capabilities to the existing AngularJS project. The app can now be installed on a device and loads offline.
+
+### What Was Added
+
+- `manifest.json` — defines app identity, theme color, icons, and shortcuts
+- `sw.js` — Service Worker implementing Cache-First for static assets and Network-First for CDN resources
+- SW registration script inside `index.html` — registers `sw.js` on page load
+- `icons/` folder — 8 icon sizes (72×72 to 512×512) for device home screens
+
+### Master Prompt (PWA Conversion)
+
+> *"I am using AngularJS 1.x as my framework. My project has a flat file structure — all files (index.html, main.css, app.js) are at the root, with an icons/ subfolder for PWA icons. Help me convert this into a fully working PWA by: (1) generating a valid manifest.json with ADDU Nation branding and all 8 icon sizes, (2) creating a sw.js Service Worker with Cache-First strategy for local assets and Network-First for CDN URLs like AngularJS and Chart.js, and (3) adding the Service Worker registration script inside index.html before the closing body tag. Make sure all file paths match the flat structure — no styles/ or js/ subfolders."*
+
+---
+
+### AI Hallucinations & Errors Encountered
+
+These are the errors and issues discovered during the PWA conversion that required manual fixes:
+
+**1. Service Worker was never registered (biggest issue)**
+- What happened: The AI generated `sw.js` but never added the registration script to `index.html`. The browser had no idea `sw.js` existed, so DevTools showed no Service Worker at all.
+- Fix: Manually added the registration block before `</body>` in `index.html`:
+  ```js
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(r => console.log('[PWA] SW registered', r))
+        .catch(e => console.error('[PWA] SW failed', e));
+    });
+  }
+  ```
+
+**2. Wrong file paths in `sw.js`**
+- What happened: The AI assumed a structured folder layout (`./styles/main.css`, `./js/app.js`) but the actual project uses a flat structure where `main.css` and `app.js` are at the root.
+- Fix: Updated the `PRECACHE_ASSETS` array in `sw.js` to use the correct flat paths:
+  ```js
+  './main.css',
+  './app.js',
+  ```
+
+**3. `manifest.json` icon purpose warning**
+- What happened: The AI used `"purpose": "maskable any"` on all icons, which Chrome's DevTools flags as discouraged because it can cause rendering issues on some platforms.
+- Fix: Split each icon entry into two separate entries — one with `"purpose": "any"` and one with `"purpose": "maskable"`.
+
+**4. Service Worker registration error when opening via Chrome directly**
+- What happened: Opening `index.html` through VS Code's Run & Debug or by double-clicking caused this error in the console:
+  ```
+  TypeError: Failed to register a ServiceWorker: The URL protocol of the current origin ('null') is not supported.
+  ```
+- Root cause: Chrome blocks Service Workers over the `file://` protocol. This is a browser security restriction, not a code bug.
+- Fix: Always open the project using Live Server (`http://127.0.0.1:5500`) — never via `file://`.
+
+**5. Live Server defaulted to Edge instead of Chrome**
+- What happened: After setting up Live Server, right-clicking → Open with Live Server opened Microsoft Edge, where the PWA install button looked different and behavior varied.
+- Fix: Changed the Live Server custom browser setting to Chrome via VS Code Settings → search `Live Server browser` → set to `chrome`. Alternatively, add `"liveServer.settings.CustomBrowser": "chrome"` to `settings.json`.
+
+---
+
 ## AI Tools Used
 
 | Tool | Purpose |
 |------|---------|
-| **Claude AI** | Converted the original single-file HTML app into a structured AngularJS project using `ng-template` for inline partials |
+| **Claude AI** | Converted the original single-file HTML app into a structured AngularJS project using `ng-template` for inline partials; also assisted with PWA conversion (manifest, Service Worker, icon setup) |
 | **ChatGPT** | Used to refine and improve prompts for better output |
 
 ---
@@ -114,37 +209,23 @@ Rather than loading separate HTML files (which can cause issues with Live Server
 ## Prompts
 
 **First Prompt** *(to Claude AI)*
-> *"You are an expert Angular developer. I want you to generate a complete, working Angular web application based on a mobile app design that I will provide.
-
-GOAL:
-Convert my existing MOBILE APP DESIGN into a fully responsive and interactive WEB APPLICATION while preserving:
-- Exact color scheme
-- Layout structure
-- UI components (buttons, cards, forms, etc.)
-- Overall theme and visual style
-
-DESIGN INSTRUCTIONS:
-- The UI must closely match the provided mobile app (same spacing, fonts, colors, and hierarchy)
-- Make it responsive (desktop + mobile view)
-- Keep the design modern and clean
-- Use CSS or Angular styling (no external UI frameworks unless necessary)
-
-FUNCTIONALITY:
-- Implement all visible features from the design as working components
-- Add basic interactivity (button clicks, navigation, form input handling)
-- Ensure smooth user experience
-
-IMPORTANT:
-- Do NOT skip files
-- Do NOT give partial code
-- Generate a FULL working project
-
-I will provide the design next. Wait for it before generating code."*
+> *"You are an expert Angular developer. I want you to generate a complete, working Angular web application based on a mobile app design that I will provide.*
+>
+> *GOAL: Convert my existing MOBILE APP DESIGN into a fully responsive and interactive WEB APPLICATION while preserving: Exact color scheme, Layout structure, UI components (buttons, cards, forms, etc.), Overall theme and visual style.*
+>
+> *DESIGN INSTRUCTIONS: The UI must closely match the provided mobile app (same spacing, fonts, colors, and hierarchy). Make it responsive (desktop + mobile view). Keep the design modern and clean. Use CSS or Angular styling (no external UI frameworks unless necessary).*
+>
+> *FUNCTIONALITY: Implement all visible features from the design as working components. Add basic interactivity (button clicks, navigation, form input handling). Ensure smooth user experience.*
+>
+> *IMPORTANT: Do NOT skip files. Do NOT give partial code. Generate a FULL working project. I will provide the design next. Wait for it before generating code."*
 
 **Key Prompt that generated the full working project** *(to Claude AI)*
-> *"Here is my mobile app design (PDF/Image). Convert this into an Angular web application. Follow the exact UI, layout, and theme. Also Generate a complete Angular web application that converts my mobile app design into a responsive web interface. Maintain the exact UI/UX, colors, layout, and components. Use Angular JS and provide full working code with installation steps. Make sure to follow my previous prompts too"*
+> *"Here is my mobile app design (PDF/Image). Convert this into an Angular web application. Follow the exact UI, layout, and theme. Also Generate a complete Angular web application that converts my mobile app design into a responsive web interface. Maintain the exact UI/UX, colors, layout, and components. Use Angular JS and provide full working code with installation steps. Make sure to follow my previous prompts too."*
 
-**Prompt that refines and improve my prompts** *(to Chatgpt)*
+**PWA Master Prompt** *(to Claude AI)*
+> *"I am using AngularJS 1.x as my framework. My project has a flat file structure — all files (index.html, main.css, app.js) are at the root, with an icons/ subfolder for PWA icons. Help me convert this into a fully working PWA by: (1) generating a valid manifest.json with ADDU Nation branding and all 8 icon sizes, (2) creating a sw.js Service Worker with Cache-First strategy for local assets and Network-First for CDN URLs like AngularJS and Chart.js, and (3) adding the Service Worker registration script inside index.html before the closing body tag. Make sure all file paths match the flat structure — no styles/ or js/ subfolders."*
+
+**Prompt that refines and improves prompts** *(to ChatGPT)*
 > *"Refine and improve my prompts + (block of prompts)."*
 
 ---
@@ -265,4 +346,7 @@ The admin coordinator profile showing the gold academic passport card, additiona
 - [AngularJS 1.x Documentation](https://docs.angularjs.org/guide)
 - [Chart.js Documentation](https://www.chartjs.org/docs/)
 - [Live Server VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [MDN Web Docs — Progressive Web Apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+- [web.dev — Service Workers](https://web.dev/service-workers-cache-storage/)
+- [web.dev — Web App Manifest](https://web.dev/add-manifest/)
 - [How to write a good README](https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/)
