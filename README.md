@@ -105,7 +105,6 @@ After this, right-clicking `index.html` → **Open with Live Server** will launc
 | Page is blank | Make sure you used Live Server — do not double-click the file directly |
 | Live Server not in right-click menu | Make sure the extension is installed, then restart VS Code |
 | Styles not loading | Make sure you opened the whole **folder** in VS Code, not just the file |
-| No internet connection | The app requires internet to load AngularJS and Chart.js from CDN |
 | PWA install button not showing | Open via Live Server in Chrome — not Edge, not via Run & Debug |
 | Service Worker registration failed (`null` origin error) | You opened the file directly in the browser — use Live Server instead |
 
